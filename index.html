@@ -9,112 +9,241 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --app-primary-green: #2EE58E;
-      --app-primary-green-dark: #22C77A;
-      --app-primary-green-soft: #E9FBF2;
-      --app-background: #F7F9F8;
+      --app-primary: #2EE58E;
+      --app-primary-dark: #22C77A;
+      --app-primary-soft: #E9FBF2;
+      --app-mint: #CFF3EA;
+      --app-bg: #F7F9F8;
       --app-card: #FAFAFA;
-      --app-main-text: #111827;
-      --app-secondary-text: #6B7280;
-      --app-light-gray: #E5E7EB;
-      --app-medium-gray: #9CA3AF;
+      --app-text: #111827;
+      --app-text-secondary: #6B7280;
+      --app-border: #E5E7EB;
+      --app-muted: #9CA3AF;
+      --shadow-sm: 0 1px 3px rgba(17, 24, 39, 0.06);
+      --shadow-md: 0 4px 12px rgba(17, 24, 39, 0.08);
+      --shadow-glow: 0 8px 24px rgba(46, 229, 142, 0.2);
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Nunito', -apple-system, sans-serif;
-      background: var(--app-background);
-      color: var(--app-main-text);
-      margin: 0;
-      padding: 24px 16px 48px;
-      line-height: 1.6;
-      max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
+      background: var(--app-bg);
+      color: var(--app-text);
+      line-height: 1.65;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      padding: 32px 20px 48px;
+    }
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .hero {
       text-align: center;
-    }
-    .header {
+      padding: 36px 24px 32px;
+      background: linear-gradient(160deg, var(--app-primary-soft) 0%, var(--app-mint) 50%, var(--app-card) 100%);
+      border-radius: 24px;
+      border: 1px solid var(--app-border);
+      box-shadow: var(--shadow-md);
       margin-bottom: 28px;
-      padding: 24px 16px;
-      background: var(--app-card);
-      border-radius: 16px;
-      border: 1px solid var(--app-light-gray);
-      box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
-      width: 100%;
+      position: relative;
+      overflow: hidden;
     }
-    .app-name {
-      font-weight: 800;
-      font-size: 1.75rem;
-      color: var(--app-primary-green-dark);
-      margin: 0 0 4px 0;
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(46,229,142,0.25) 0%, transparent 70%);
+      border-radius: 50%;
     }
-    .page-title {
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--app-main-text);
-      margin: 0;
-    }
-    .badge {
+    .hero-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
       display: inline-block;
-      background: var(--app-primary-green-soft);
-      color: var(--app-primary-green-dark);
+      filter: drop-shadow(0 2px 4px rgba(34, 199, 122, 0.3));
+    }
+    .hero h1 {
+      font-weight: 800;
+      font-size: 1.85rem;
+      color: var(--app-primary-dark);
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+    .hero .tagline {
+      font-size: 0.9rem;
+      color: var(--app-text-secondary);
+      font-weight: 600;
+    }
+    .hero .badge {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.9);
+      color: var(--app-primary-dark);
       font-weight: 700;
       font-size: 0.75rem;
-      padding: 4px 10px;
       border-radius: 20px;
+      border: 1px solid var(--app-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--app-muted);
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+    .card {
+      background: var(--app-card);
+      border-radius: 16px;
+      border: 1px solid var(--app-border);
+      box-shadow: var(--shadow-sm);
+      padding: 20px 20px 22px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--app-text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card h3 span { font-size: 1.2rem; }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--app-text-secondary);
+      margin-bottom: 14px;
+    }
+    .card .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark));
+      color: white !important;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 12px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(46, 229, 142, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-glow);
+    }
+    .card .btn:active { transform: translateY(0); }
+
+    /* Single CTA block */
+    .cta-block {
+      text-align: center;
+      padding: 28px 20px;
+      background: linear-gradient(145deg, var(--app-primary-soft) 0%, var(--app-card) 100%);
+      border-radius: 20px;
+      border: 1px solid var(--app-border);
       margin-top: 8px;
+      margin-bottom: 32px;
     }
-    p {
-      color: var(--app-secondary-text);
-      margin: 0 0 20px 0;
+    .cta-block p {
       font-size: 0.95rem;
+      color: var(--app-text-secondary);
+      margin-bottom: 18px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .email-link {
+    .cta-email {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--app-primary-green), var(--app-primary-green-dark));
+      background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark));
       color: white !important;
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 14px 28px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 16px 28px;
       border-radius: 24px;
       text-decoration: none;
-      margin-top: 12px;
-      box-shadow: 0 4px 12px rgba(46, 229, 142, 0.35);
+      box-shadow: 0 6px 20px rgba(46, 229, 142, 0.4);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .email-link:hover {
+    .cta-email:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(46, 229, 142, 0.4);
+      box-shadow: var(--shadow-glow);
     }
-    .email-link:active {
-      transform: translateY(0);
+    .cta-email:active { transform: translateY(0); }
+    .cta-hint {
+      font-size: 0.8rem;
+      color: var(--app-muted);
+      margin-top: 14px;
     }
+
+    /* Footer */
     .footer {
-      margin-top: 32px;
-      font-size: 0.85rem;
-      color: var(--app-medium-gray);
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--app-border);
+      font-size: 0.8rem;
+      color: var(--app-muted);
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <p class="app-name">World Blocks</p>
-    <h1 class="page-title">Contact & Support</h1>
-    <span class="badge">CountryBlocks · Geography Puzzle App</span>
-  </header>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-icon">🌍</div>
+      <h1>World Blocks</h1>
+      <p class="tagline">Contact & Support</p>
+      <span class="badge">CountryBlocks · Geography Puzzle App</span>
+    </header>
 
-  <p>Have a question, feedback, or need help? We’d love to hear from you.</p>
-  <a class="email-link" href="mailto:hakanxcevik7@gmail.com">
-    <span>✉</span> hakanxcevik7@gmail.com
-  </a>
-  <p style="margin-top: 20px; font-size: 0.85rem;">Tap the button above to open your email app and send us a message.</p>
+    <p class="section-title">How we can help</p>
+    <section class="section">
+      <div class="card">
+        <h3><span>💬</span> Feedback & ideas</h3>
+        <p>Tell us what you love or what you’d like to see next. Your feedback shapes future updates.</p>
+        <a class="btn" href="mailto:hakanxcevik7@gmail.com?subject=World%20Blocks%20-%20Feedback">Send feedback</a>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card">
+        <h3><span>🐛</span> Bug report</h3>
+        <p>Found something that isn’t working as expected? Send us the details and we’ll look into it.</p>
+        <a class="btn" href="mailto:hakanxcevik7@gmail.com?subject=World%20Blocks%20-%20Bug%20Report">Report a bug</a>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card">
+        <h3><span>❓</span> General inquiry</h3>
+        <p>Questions about the app, subscriptions, or anything else? We’re here to help.</p>
+        <a class="btn" href="mailto:hakanxcevik7@gmail.com?subject=World%20Blocks%20-%20Question">Get in touch</a>
+      </div>
+    </section>
 
-  <p class="footer">© World Blocks · CountryBlocks iOS App</p>
+    <div class="cta-block">
+      <p>Prefer to write directly? Use the button below to open your email app — we’ll get back to you as soon as we can.</p>
+      <a class="cta-email" href="mailto:hakanxcevik7@gmail.com">✉️ hakanxcevik7@gmail.com</a>
+      <p class="cta-hint">Tap to open your default mail app</p>
+    </div>
+
+    <footer class="footer">
+      © World Blocks · CountryBlocks iOS App
+    </footer>
+  </div>
 </body>
 </html>
